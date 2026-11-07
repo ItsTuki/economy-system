@@ -1,34 +1,16 @@
-import org.gradle.jvm.tasks.Jar
-
-private val targetMinecraftVersion = "1.21.11"
-private val runtimeServerVersion = "1.21.11"
-private val paperApiVersion = "$targetMinecraftVersion-R0.1-SNAPSHOT"
-
 plugins {
-    `java`
-    id("xyz.jpenilla.run-paper") version "2.3.0"
+    java
+    alias(libs.plugins.run.paper)
 }
 
-group = "com.mc.economy"
-version = "1.0.1"
+group = "cl.auryx.economy"
+version = "2.0.0"
+description = "Monedas físicas incrafteables para economías de servidor Paper."
+
+val minecraftVersion: String by project
 
 repositories {
-    maven("https://artifactory.papermc.io/artifactory/universe/") {
-        name = "papermc-universe"
-        metadataSources {
-            mavenPom()
-            artifact()
-        }
-        content {
-            includeGroup("io.papermc.paper")
-            excludeModule("io.papermc.paper", "dev-bundle")
-        }
-    }
-    maven("https://repo.papermc.io/repository/maven-public/") {
-        content {
-            excludeGroup("io.papermc.paper")
-        }
-    }
+    maven("https://repo.papermc.io/repository/maven-public/")
     mavenCentral()
 }
 
@@ -37,23 +19,32 @@ dependencies {
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+    // Minecraft 26.x / Paper 26.x requieren Java 25
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks {
+    compileJava {
+        options.encoding = "UTF-8"
+        options.release = 25
+        options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:unchecked"))
     }
-}
 
-tasks.processResources {
-    inputs.property("version", project.version)
-    filteringCharset = "UTF-8"
-    filesMatching("plugin.yml") {
-        expand("version" to project.version)
+    processResources {
+        val props = mapOf("version" to project.version.toString())
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
     }
-}
 
-tasks.named<Jar>("jar") {
-    archiveBaseName.set("EconomySystem")
-}
+    jar {
+        archiveBaseName = "EconomySystem"
+    }
 
-tasks.runServer {
-    minecraftVersion(runtimeServerVersion)
+    runServer {
+        minecraftVersion(minecraftVersion)
+        jvmArgs("-Dcom.mojang.eula.agree=true")
+    }
 }

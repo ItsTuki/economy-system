@@ -1,0 +1,113 @@
+# Textos del plugin en formato MiniMessage: https://docs.advntr.dev/minimessage/format
+# <prefix> inserta el prefijo. Cada mensaje indica sus variables disponibles.
+# Deja un mensaje en "" para no enviarlo.
+
+prefix: "<dark_gray>[<gradient:#FFD122:#FF8D42>Economía</gradient><dark_gray>]</dark_gray> "
+
+errors:
+  player-only: "<prefix><red>Este comando solo puede usarlo un jugador."
+  # <input>
+  unknown-currency: "<prefix><red>Moneda desconocida: <white><input></white>. Usa <yellow>/economy list</yellow>."
+  # <max>
+  amount-too-high: "<prefix><red>La cantidad máxima por comando es <white><max></white>."
+  no-targets: "<prefix><red>No se encontró ningún jugador en línea."
+  feature-disabled: "<prefix><red>Esta función está desactivada en el servidor."
+  # <amount> <currency>
+  not-enough: "<prefix><red>No tienes <white><amount></white> <currency>."
+  inventory-full: "<prefix><red>No tienes espacio suficiente en el inventario."
+
+help:
+  admin:
+    - "<gradient:#FFD122:#FF8D42><bold>EconomyItems</bold></gradient> <gray>v<version>"
+    - "<yellow>/economy list</yellow> <gray>— monedas disponibles"
+    - "<yellow>/economy give <jugador> <moneda> <cantidad></yellow> <gray>— entregar monedas"
+    - "<yellow>/economy take <jugador> <moneda> <cantidad></yellow> <gray>— quitar monedas"
+    - "<yellow>/economy remove <jugador> [moneda]</yellow> <gray>— retirar todas las monedas"
+    - "<yellow>/economy balance <jugador></yellow> <gray>— ver monedas de un jugador"
+    - "<yellow>/economy add <id> <material> <color> <valor> <nombre></yellow> <gray>— crear moneda"
+    - "<yellow>/economy info</yellow> <gray>— inspeccionar la moneda en tu mano"
+    - "<yellow>/economy reload</yellow> <gray>— recargar configuración"
+  player:
+    - "<gradient:#FFD122:#FF8D42><bold>Monedas</bold></gradient>"
+    - "<yellow>/coins</yellow> <gray>— ver tus monedas y su valor"
+    - "<yellow>/coins exchange <de> <a> <cantidad|all></yellow> <gray>— cambiar monedas"
+    - "<yellow>/coins condense</yellow> <gray>— agrupar tus monedas"
+    - "<yellow>/coins pay <jugador> <moneda> <cantidad></yellow> <gray>— pagar a otro jugador"
+
+list:
+  header: "<prefix><gray>Monedas disponibles (<white><count></white>):"
+  # <currency> <id> <value> <material>
+  entry: "<dark_gray> • </dark_gray><currency> <dark_gray>(<id>)</dark_gray> <gray>valor:</gray> <white><value></white>"
+
+give:
+  # <amount> <currency> <target> <count>
+  sender: "<prefix><green>Entregaste <white><amount></white> <currency> a <white><target></white>."
+  target: "<prefix><green>Recibiste <white><amount></white> <currency>."
+  # <target> <given> <amount>
+  partial: "<prefix><yellow>El inventario de <white><target></white> está lleno: se entregaron <white><given></white> de <white><amount></white>."
+
+take:
+  # <amount> <currency> <target> <requested>
+  sender: "<prefix><green>Retiraste <white><amount></white> <currency> de <white><target></white>."
+  target: "<prefix><yellow>Un administrador retiró <white><amount></white> <currency> de tu inventario."
+
+remove:
+  # <amount> <target>
+  sender: "<prefix><green>Se eliminaron <white><amount></white> monedas del inventario de <white><target></white>."
+  target: "<prefix><yellow>Tus monedas han sido retiradas por un administrador."
+
+balance:
+  header-self: "<prefix><gray>Tus monedas:"
+  # <target>
+  header-other: "<prefix><gray>Monedas de <white><target></white>:"
+  # <currency> <amount> <value>
+  entry: "<dark_gray> • </dark_gray><currency><gray>: <white><amount></white> <dark_gray>(<value>)"
+  # <value> <base>
+  total: "<gray>Valor total: <gold><value></gold> <base>"
+  empty: "<prefix><gray>No hay monedas en el inventario."
+
+exchange:
+  # <from-amount> <from> <to-amount> <to>
+  success: "<prefix><green>Cambiaste <white><from-amount></white> <from> por <white><to-amount></white> <to>."
+  # <change>
+  change: "<gray>Vuelto: <change>"
+  same: "<prefix><red>Elige dos monedas distintas."
+  # <amount> <from> <to>
+  too-small: "<prefix><red><white><amount></white> <from> no alcanza para 1 <to>."
+  inexact: "<prefix><red>Ese cambio no es exacto con las monedas disponibles."
+
+condense:
+  # <summary>
+  success: "<prefix><green>Monedas agrupadas: <summary>"
+  nothing: "<prefix><gray>Tus monedas ya están agrupadas."
+
+pay:
+  self: "<prefix><red>No puedes pagarte a ti mismo."
+  # <max>
+  too-far: "<prefix><red>Debes estar a menos de <white><max></white> bloques del jugador."
+  # <amount> <currency> <target>
+  sender: "<prefix><green>Pagaste <white><amount></white> <currency> a <white><target></white>."
+  # <amount> <currency> <player>
+  target: "<prefix><green><white><player></white> te pagó <white><amount></white> <currency>."
+
+add:
+  exists: "<prefix><red>Ya existe una moneda con ese identificador o alias."
+  # <input>
+  invalid-material: "<prefix><red>Material inválido: <white><input></white>."
+  invalid-color: "<prefix><red>Color inválido. Usa un nombre (gold, aqua) o hex (#FFAA00)."
+  # <currency> <id>
+  success: "<prefix><green>Moneda <currency> <green>creada con id <white><id></white>. Edita currencies.yml para personalizarla."
+  failed: "<prefix><red>No se pudo guardar la moneda; revisa la consola."
+
+reload:
+  # <count>
+  success: "<prefix><green>Configuración recargada. <white><count></white> monedas activas."
+
+info:
+  not-coin: "<prefix><red>No tienes una moneda en la mano."
+  # <currency> <id> <value> <amount>
+  coin: "<prefix><currency> <dark_gray>|</dark_gray> <gray>id: <white><id></white> <gray>valor: <white><value></white> <gray>cantidad: <white><amount></white>"
+
+protection:
+  crafting: "<prefix><red>Las monedas no pueden usarse en recetas."
+  recipe: "<prefix><red>Las monedas no pueden fabricarse."

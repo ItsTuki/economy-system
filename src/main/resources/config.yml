@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────
+#  EconomyItems — configuración general
+#  Las monedas se definen en currencies.yml y los textos en messages.yml.
+#  Aplica los cambios con /economy reload.
+# ─────────────────────────────────────────────────────────────
+config-version: 2
+
+coins:
+  # Tamaño máximo de cada stack de monedas (1-99).
+  max-stack-size: 99
+  # Al entrar un jugador, actualiza nombre, lore y modelo de sus monedas
+  # para que coincidan con currencies.yml (la cantidad no cambia).
+  refresh-on-join: true
+
+commands:
+  # Cantidad máxima permitida en un solo /economy give o take.
+  max-amount: 10000
+  # Si el inventario del jugador está lleno, las monedas que sobran caen al suelo.
+  # Si es false, solo se entrega lo que cabe.
+  drop-when-full: true
+  # Avisar al jugador cuando un admin le da o quita monedas.
+  notify-targets: true
+  # Registrar en la consola cada entrega, retiro y pago.
+  log-transactions: true
+
+player-commands:
+  # /coins exchange <de> <a> <cantidad>: cambia monedas según su "value".
+  exchange: true
+  # /coins condense: agrupa todas tus monedas en la menor cantidad posible.
+  condense: true
+  pay:
+    # /coins pay <jugador> <moneda> <cantidad>: entrega monedas a otro jugador.
+    enabled: true
+    # Distancia máxima en bloques entre ambos jugadores (0 = sin límite).
+    max-distance: 0
+
+dropped-coins:
+  # Las monedas tiradas al suelo no desaparecen a los 5 minutos.
+  never-despawn: true
+  # Las monedas en el suelo no se destruyen con lava, fuego, cactus o explosiones.
+  invulnerable: true
+
+protection:
+  # Impide usar monedas en mesas de crafteo y recetas que terminen en "-coin".
+  crafting: true
+  # Impide usar monedas en el crafter (autocrafteador).
+  crafter: true
+  # Impide usar monedas en yunque, afiladora, mesa de herrería, telar y similares.
+  workstations: true
+  # Impide usar monedas como combustible o ingrediente en hornos.
+  furnaces: true
+  # Impide pagar a aldeanos o comerciantes con monedas (ej. si una moneda es una esmeralda).
+  villager-trades: true
+  # Impide colocar monedas cuyo material es un bloque.
+  placing: true
+  # Impide comer o beber monedas cuyo material es consumible.
+  consuming: true
