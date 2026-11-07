@@ -9,6 +9,7 @@ import cl.auryx.economy.currency.CurrencyDefinition;
 import cl.auryx.economy.currency.CurrencyManager;
 import cl.auryx.economy.listener.CoinItemListener;
 import cl.auryx.economy.listener.CoinProtectionListener;
+import cl.auryx.economy.util.Credits;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import java.util.List;
 import org.bukkit.entity.Player;
@@ -40,8 +41,12 @@ public final class EconomyPlugin extends JavaPlugin {
                     "Consulta, cambia y paga con tus monedas.", List.of("monedas"));
         });
 
-        getLogger().info("EconomyItems " + getPluginMeta().getVersion() + " activo con "
-                + currencyManager.definitions().size() + " monedas.");
+        Credits.enableBanner(this, currencyManager.definitions().size());
+    }
+
+    @Override
+    public void onDisable() {
+        Credits.disableBanner(this);
     }
 
     /** Recarga config.yml, messages.yml y currencies.yml. */

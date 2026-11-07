@@ -5,7 +5,7 @@ main: cl.auryx.economy.EconomyPlugin
 version: ${version}
 description: Monedas físicas incrafteables para economías de servidor.
 api-version: "26.1"
-authors: [DSieghard, ItsTuki]
+authors: [ItsTuki, DSieghard]
 website: https://github.com/ItsTuki/economy-system
 
 # Los comandos /economy y /coins se registran con Brigadier desde el código.

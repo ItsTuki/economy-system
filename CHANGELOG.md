@@ -20,6 +20,7 @@
 - Monedas tiradas al suelo: sin despawn e invulnerables (configurable).
 - Protecciones extra: yunque, afiladora, herrería, telar, hornos, aldeanos, colocar bloques y consumir.
 - Las monedas existentes se actualizan solas al entrar o con `/economy reload`.
+- Banner con colores en la consola al iniciar y apagar el plugin, y créditos ("Creado por ItsTuki") en la ayuda de `/economy` y `/coins`.
 
 ### Correcciones
 - Cualquier moneda del plugin queda protegida aunque su id no termine en `-coin`.

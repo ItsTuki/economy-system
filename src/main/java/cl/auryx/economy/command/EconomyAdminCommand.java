@@ -4,6 +4,7 @@ import cl.auryx.economy.EconomyPlugin;
 import cl.auryx.economy.currency.CurrencyDefinition;
 import cl.auryx.economy.currency.CurrencyConfigLoader;
 import cl.auryx.economy.currency.CurrencyManager;
+import cl.auryx.economy.util.Credits;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.LongArgumentType;
@@ -127,6 +128,7 @@ public final class EconomyAdminCommand {
     private int help(CommandContext<CommandSourceStack> ctx) {
         plugin.messages().sendList(CommandSupport.sender(ctx), "help.admin",
                 Placeholder.unparsed("version", plugin.getPluginMeta().getVersion()));
+        CommandSupport.sender(ctx).sendMessage(Credits.helpLine());
         return Command.SINGLE_SUCCESS;
     }
 

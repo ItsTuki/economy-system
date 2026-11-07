@@ -3,6 +3,7 @@ package cl.auryx.economy.command;
 import cl.auryx.economy.EconomyPlugin;
 import cl.auryx.economy.currency.CurrencyDefinition;
 import cl.auryx.economy.currency.CurrencyManager;
+import cl.auryx.economy.util.Credits;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -38,6 +39,7 @@ public final class PlayerCoinsCommand {
                 .executes(this::balance)
                 .then(Commands.literal("help").executes(ctx -> {
                     plugin.messages().sendList(CommandSupport.sender(ctx), "help.player");
+                    CommandSupport.sender(ctx).sendMessage(Credits.helpLine());
                     return Command.SINGLE_SUCCESS;
                 }))
                 .then(Commands.literal("balance").executes(this::balance))
