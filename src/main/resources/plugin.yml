@@ -1,0 +1,16 @@
+name: EconomyItems
+main: com.mc.economy.EconomyPlugin
+version: ${version}
+description: Sistema de tres monedas incrafteables para economías implícitas.
+api: ["paper-1.21"]
+api-version: "1.21"
+authors: ["DSieghard"]
+commands:
+  economy:
+    description: Administra las monedas especiales.
+    usage: /economy give <jugador> <moneda> <cantidad>
+    permission: economy.admin
+permissions:
+  economy.admin:
+    description: Autoriza la emisión y gestión de monedas.
+    default: op
